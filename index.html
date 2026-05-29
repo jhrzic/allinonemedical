@@ -336,7 +336,7 @@ span[data-lang="en"]{display:inline}
       <div class="pbadge"><span data-lang="en">New</span><span data-lang="es">Nuevo</span></div>
       <div class="pimg">
         <img
-          src="https://www.vitalitymedical.com/media/catalog/product/cache/f0486a80047dcb9112ac3f70ec55dda9/r/h/rhythm-p2-portable-oxygen-concentrator.jpg"
+          src="https://www.rehabmart.com/imagesfromrd/P2_concentrator-01.jpg"
           alt="P2 Portable Oxygen Concentrator Rhythm"
           loading="lazy"
           onerror="this.style.display='none'"
@@ -550,16 +550,26 @@ span[data-lang="en"]{display:inline}
     <h2 class="st"><span data-lang="en">Ready to Breathe Freely?</span><span data-lang="es">¿Listo para Respirar Libre?</span></h2>
     <p><span data-lang="en">Get in touch with our team for personalized recommendations.</span><span data-lang="es">Contáctenos para recomendaciones personalizadas.</span></p>
     <div class="cf">
-      <div class="fr">
-        <div class="ff"><input type="text" placeholder="Full Name / Nombre Completo"></div>
-        <div class="ff"><input type="email" placeholder="Email / Correo Electrónico"></div>
+      <!-- Success banner (hidden until submit) -->
+      <div id="form-success" style="display:none;background:#eff4ff;border:1.5px solid rgba(26,86,219,0.25);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1.25rem;display:none;align-items:center;gap:12px">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1a56db" stroke-width="2.5" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg>
+        <div>
+          <p style="font-weight:800;color:#0d1117;margin-bottom:2px" id="success-title">Thank you! We'll be in touch soon.</p>
+          <p style="font-size:13px;color:#4a5568" id="success-sub">Your inquiry has been received. Our team will contact you within 24 hours.</p>
+        </div>
       </div>
-      <div class="fff"><input type="tel" placeholder="Phone Number / Número de Teléfono"></div>
-      <div class="fff"><textarea rows="4" placeholder="Tell us about your needs... / Cuéntenos sobre sus necesidades..."></textarea></div>
-      <button class="bsub">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        <span data-lang="en">Send Inquiry</span><span data-lang="es">Enviar Consulta</span>
-      </button>
+      <div id="form-fields">
+        <div class="fr">
+          <div class="ff"><input id="f-name" type="text" placeholder="Full Name / Nombre Completo"></div>
+          <div class="ff"><input id="f-email" type="email" placeholder="Email / Correo Electrónico"></div>
+        </div>
+        <div class="fff"><input id="f-phone" type="tel" placeholder="Phone Number / Número de Teléfono"></div>
+        <div class="fff"><textarea id="f-msg" rows="4" placeholder="Tell us about your needs... / Cuéntenos sobre sus necesidades..."></textarea></div>
+        <button class="bsub" onclick="submitForm()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          <span data-lang="en">Send Inquiry</span><span data-lang="es">Enviar Consulta</span>
+        </button>
+      </div>
     </div>
   </div>
 </section>
@@ -589,6 +599,8 @@ span[data-lang="en"]{display:inline}
       <div class="fci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.67 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.36 6.36l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         <a href="tel:9544017797">(954) 401-7797</a>
+        <span style="color:var(--border-mid);margin:0 4px">·</span>
+        <span style="color:var(--text-mid);font-size:13px">¿Habla español? Llámenos al <a href="tel:9546610676" style="color:var(--blue);font-weight:700;text-decoration:none">954-661-0676</a></span>
       </div>
       <div class="fci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
@@ -631,18 +643,47 @@ span[data-lang="en"]{display:inline}
   <span data-lang="en">Call Now</span><span data-lang="es">Llamar</span>
 </a>
 
+<style>
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+.shake{animation:shake .35s ease}
+.field-err{border-color:#e53e3e!important;background:#fff8f8!important}
+</style>
 <script>
 function setLang(l){
   document.body.className=l;
   document.getElementById('ben').classList.toggle('on',l==='en');
   document.getElementById('bes').classList.toggle('on',l==='es');
   document.documentElement.lang=l;
+  var es=l==='es';
+  document.getElementById('success-title').textContent=es?'¡Gracias! Nos pondremos en contacto pronto.':'Thank you! We\'ll be in touch soon.';
+  document.getElementById('success-sub').textContent=es?'Su consulta ha sido recibida. Nuestro equipo le contactará en 24 horas.':'Your inquiry has been received. Our team will contact you within 24 hours.';
 }
 function tfaq(b){
   var a=b.nextElementSibling,o=a.classList.contains('on');
   document.querySelectorAll('.fa').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.fq').forEach(x=>x.classList.remove('on'));
   if(!o){a.classList.add('on');b.classList.add('on')}
+}
+function submitForm(){
+  var name=document.getElementById('f-name');
+  var email=document.getElementById('f-email');
+  var phone=document.getElementById('f-phone');
+  var msg=document.getElementById('f-msg');
+  var ok=true;
+  [name,email,phone,msg].forEach(function(f){f.classList.remove('field-err')});
+  if(!name.value.trim()){name.classList.add('field-err');ok=false}
+  if(!email.value.trim()||!email.value.includes('@')){email.classList.add('field-err');ok=false}
+  if(!phone.value.trim()){phone.classList.add('field-err');ok=false}
+  if(!ok){
+    document.querySelector('.cf').classList.add('shake');
+    setTimeout(function(){document.querySelector('.cf').classList.remove('shake')},400);
+    return;
+  }
+  var s=document.getElementById('form-success');
+  var ff=document.getElementById('form-fields');
+  ff.style.display='none';
+  s.style.display='flex';
+  s.scrollIntoView({behavior:'smooth',block:'center'});
 }
 </script>
 </body>
