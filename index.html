@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All In One Medical Group</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#fff;color:#0d1117;font-family:'Figtree',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Figtree',sans-serif;line-height:1.15;font-weight:800;color:#0d1117}
+
+/* TOKENS */
+:root{
+  --blue:#1a56db;
+  --blue-dark:#1241a3;
+  --blue-light:#eff4ff;
+  --blue-border:rgba(26,86,219,0.18);
+  --text:#0d1117;
+  --text-mid:#4a5568;
+  --text-light:#718096;
+  --border:#e2e6ec;
+  --border-mid:#c9d0db;
+  --bg:#f7f8fa;
+  --white:#ffffff;
+  --shadow:0 2px 12px rgba(0,0,0,0.07);
+  --shadow-lg:0 8px 32px rgba(0,0,0,0.11);
+  --r:14px;
+  --r-lg:20px;
+}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  height:64px;display:flex;align-items:center;
+  justify-content:space-between;
+  padding:0 clamp(1rem,5vw,3.5rem);
+}
+.logo{font-weight:900;font-size:15px;color:var(--text);text-decoration:none;white-space:nowrap}
+.logo em{color:var(--blue);font-style:normal}
+.nav-r{display:flex;align-items:center;gap:1.5rem}
+.nav-links{display:flex;gap:1.25rem;list-style:none}
+.nav-links a{color:var(--text-mid);text-decoration:none;font-size:14px;font-weight:600;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.lang-wrap{display:flex;background:var(--bg);border:1px solid var(--border);border-radius:999px;overflow:hidden}
+.lb{background:none;border:none;color:var(--text-mid);font-size:13px;font-weight:700;padding:6px 14px;cursor:pointer;font-family:'Figtree',sans-serif;transition:all .2s;border-radius:999px}
+.lb.on{background:var(--text);color:#fff}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:'Figtree',sans-serif;font-weight:700;font-size:14px;text-decoration:none;cursor:pointer;border:none;transition:all .2s;white-space:nowrap;border-radius:999px}
+.btn-blue{background:var(--blue);color:#fff;padding:13px 22px}
+.btn-blue:hover{background:var(--blue-dark);transform:translateY(-1px)}
+.btn-dark{background:var(--text);color:#fff;padding:13px 22px}
+.btn-dark:hover{background:#1a1a2e}
+.btn-ghost{background:transparent;color:var(--text);padding:12px 22px;border:1.5px solid var(--border-mid)}
+.btn-ghost:hover{border-color:var(--text)}
+.btn-white{background:#fff;color:var(--text);padding:13px 22px}
+.btn-white:hover{background:#f0f0f0}
+.btn-ghost-w{background:transparent;color:#fff;padding:12px 22px;border:1.5px solid rgba(255,255,255,.35)}
+.btn-ghost-w:hover{border-color:rgba(255,255,255,.7)}
+
+/* HERO */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:80px clamp(1rem,5vw,4rem) 4rem;
+  gap:3rem;flex-wrap:wrap;background:#fff;
+}
+.hero-c{flex:1;min-width:280px;max-width:520px}
+.pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--blue-light);border:1px solid var(--blue-border);
+  border-radius:999px;padding:5px 14px;
+  font-size:12px;font-weight:700;color:var(--blue);
+  letter-spacing:.5px;text-transform:uppercase;margin-bottom:1.25rem;
+}
+.pill::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.hero h1{font-size:clamp(2.6rem,5vw,4.5rem);font-weight:900;letter-spacing:-2px;margin-bottom:1.25rem;line-height:1.05}
+.hero h1 em{color:var(--blue);font-style:normal}
+.hero p{font-size:17px;color:var(--text-mid);line-height:1.7;margin-bottom:2rem;max-width:440px}
+.hbtns{display:flex;gap:.875rem;flex-wrap:wrap}
+.hero-img{flex:1;min-width:280px;max-width:560px;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:4/3;box-shadow:var(--shadow-lg)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+
+/* TRUST BAR */
+.trust{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:1rem clamp(1rem,5vw,4rem);display:flex;flex-wrap:wrap;gap:.65rem 1.75rem;align-items:center}
+.ti{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.tdot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex-shrink:0}
+.ti span{font-size:13px;font-weight:600;color:var(--text-mid)}
+
+/* SECTIONS */
+section{padding:5rem clamp(1rem,5vw,4rem)}
+.ey{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--blue);margin-bottom:.6rem}
+.st{font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:900;letter-spacing:-1px;margin-bottom:.75rem}
+.ss{font-size:16px;color:var(--text-mid);max-width:520px;line-height:1.7}
+.tc{text-align:center}
+.tc .ss{margin:0 auto 2.5rem}
+
+/* PRODUCTS */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
+.pc{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:all .3s;box-shadow:var(--shadow);position:relative}
+.pc:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--border-mid)}
+.pbadge{position:absolute;top:14px;left:14px;z-index:2;background:var(--blue);color:#fff;font-size:11px;font-weight:800;padding:4px 12px;border-radius:999px;text-transform:uppercase;letter-spacing:.3px}
+.pimg{width:100%;aspect-ratio:1.15/1;background:var(--bg);overflow:hidden;position:relative}
+.pimg img{width:100%;height:100%;object-fit:contain;padding:1.5rem;transition:transform .4s}
+.pc:hover .pimg img{transform:scale(1.04)}
+/* fallback background for broken images */
+.pimg::after{content:'📦';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:64px;z-index:0;opacity:.15;pointer-events:none}
+.pimg img{position:relative;z-index:1}
+.pi{padding:1.25rem 1.5rem 1.5rem}
+.pn{font-size:16px;font-weight:800;margin-bottom:.3rem;line-height:1.3}
+.pd{font-size:13px;color:var(--text-mid);margin-bottom:1rem;line-height:1.6}
+.pf{display:flex;align-items:center;justify-content:flex-end}
+.inq{background:var(--blue-light);color:var(--blue);font-size:13px;font-weight:700;padding:9px 18px;border:1px solid var(--blue-border);border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'Figtree',sans-serif;text-decoration:none;transition:all .2s}
+.inq:hover{background:var(--blue);color:#fff}
+
+/* SERVICES */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:2.5rem}
+.sc{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;transition:all .3s;box-shadow:var(--shadow)}
+.sc:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
+.sico{font-size:28px;margin-bottom:1rem}
+.sc h3{font-size:15px;font-weight:800;margin-bottom:.4rem}
+.sc p{font-size:13px;color:var(--text-mid);line-height:1.6;margin-bottom:1rem}
+.sl{font-size:13px;font-weight:700;color:var(--blue);text-decoration:none;display:inline-flex;align-items:center;gap:5px;transition:gap .2s}
+.sl:hover{gap:9px}
+
+/* SPLIT */
+.sw{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.sey{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--text-light);margin-bottom:.75rem}
+.sey svg{color:var(--blue)}
+.sw h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:900;letter-spacing:-.8px;margin-bottom:1rem}
+.ht{font-size:15px;color:var(--blue);line-height:1.7;margin-bottom:1.25rem;font-weight:500}
+.fl{list-style:none;margin-bottom:1.75rem}
+.fl li{display:flex;align-items:flex-start;gap:10px;font-size:14px;color:var(--text-mid);padding:5px 0}
+.fl li::before{content:'';flex-shrink:0;width:18px;height:18px;margin-top:1px;border-radius:50%;background:var(--blue-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%231a56db' stroke-width='3'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") center no-repeat;border:1px solid var(--blue-border)}
+.sbtns{display:flex;gap:.875rem;flex-wrap:wrap}
+.fp{background:var(--bg);border:1px solid var(--border);border-radius:var(--r-lg);padding:2rem;overflow:hidden}
+.fpi{text-align:center;padding:1.5rem 0 1.25rem;font-size:72px;line-height:1}
+.fpit{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--border);font-size:14px;color:var(--text-mid);font-weight:500}
+.fpit::before{content:'';width:18px;height:18px;flex-shrink:0;border-radius:50%;background:var(--blue-light) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 24 24' fill='none' stroke='%231a56db' stroke-width='3'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E") center no-repeat;border:1px solid var(--blue-border)}
+
+/* AREAS */
+.ag{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:2.5rem}
+.ac{background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.75rem;box-shadow:var(--shadow);transition:all .25s}
+.ac:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.ac h3{font-size:18px;font-weight:800;display:flex;align-items:center;gap:8px;margin-bottom:.65rem}
+.ac h3 svg{color:var(--blue)}
+.ac p{font-size:13px;color:var(--text-mid);line-height:1.6;margin-bottom:1rem}
+a.tl{color:var(--blue);text-decoration:none;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:5px;transition:gap .2s}
+a.tl:hover{gap:9px}
+
+/* FAQ */
+.faq-w{max-width:680px;margin:2.5rem auto 0}
+.fi{border:1px solid var(--border);border-radius:var(--r);margin-bottom:10px;overflow:hidden;background:#fff}
+.fq{width:100%;background:none;border:none;text-align:left;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:var(--text);font-size:15px;font-weight:700;font-family:'Figtree',sans-serif;gap:1rem}
+.fq svg{flex-shrink:0;transition:transform .3s;color:var(--text-mid)}
+.fq.on svg{transform:rotate(180deg)}
+.fa{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s;padding:0 1.4rem;font-size:14px;color:var(--text-mid);line-height:1.7}
+.fa.on{max-height:200px;padding:0 1.4rem 1.25rem}
+.ffoot{text-align:center;margin-top:1.75rem}
+
+/* CONTACT */
+.con-i{max-width:600px;margin:0 auto;text-align:center}
+.con-i p{color:var(--text-mid);margin-bottom:2rem;font-size:16px}
+.cf{background:#fff;border:1px solid var(--border);border-radius:var(--r-lg);padding:2rem;text-align:left;box-shadow:var(--shadow)}
+.fr{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:.875rem}
+.ff input,.fff input,.fff textarea{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:14px;font-family:'Figtree',sans-serif;font-weight:500;outline:none;transition:border-color .2s;resize:none}
+.fff{margin-bottom:.875rem}
+.ff input::placeholder,.fff input::placeholder,.fff textarea::placeholder{color:var(--text-light)}
+.ff input:focus,.fff input:focus,.fff textarea:focus{border-color:var(--blue);background:#fff}
+.bsub{width:100%;background:var(--text);color:#fff;font-weight:800;font-size:15px;padding:14px;border-radius:10px;border:none;cursor:pointer;font-family:'Figtree',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s}
+.bsub:hover{background:var(--blue)}
+
+/* CTA */
+.cta{background:var(--text);color:#fff;text-align:center;padding:5rem clamp(1rem,5vw,4rem)}
+.cta h2{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:900;color:#fff;margin-bottom:.6rem;letter-spacing:-.8px}
+.cta p{color:rgba(255,255,255,.65);margin-bottom:2rem;font-size:16px}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* FOOTER */
+footer{background:#f7f8fa;border-top:1px solid var(--border);padding:4rem clamp(1rem,5vw,4rem) 2rem}
+.fg{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+.fb .logo{display:block;margin-bottom:.65rem;font-size:16px}
+.fb p{font-size:13px;color:var(--text-mid);line-height:1.7;margin-bottom:1.1rem;max-width:340px}
+.fci{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text-mid);margin-bottom:.45rem;font-weight:500}
+.fci svg{color:var(--blue);flex-shrink:0}
+.fci a{color:inherit;text-decoration:none}
+.fc h4{font-size:13px;font-weight:800;color:var(--text);margin-bottom:.9rem}
+.fc ul{list-style:none}
+.fc ul li{margin-bottom:.5rem}
+.fc ul li a{font-size:13px;color:var(--text-mid);text-decoration:none;transition:color .2s}
+.fc ul li a:hover{color:var(--blue)}
+.fb2{border-top:1px solid var(--border);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.fb2 p{font-size:12px;color:var(--text-light)}
+.fb2-l{display:flex;gap:1.5rem}
+.fb2-l a{font-size:12px;color:var(--text-light);text-decoration:none}
+.fb2-l a:hover{color:var(--blue)}
+
+/* FAB */
+.fab{position:fixed;bottom:1.75rem;right:1.75rem;z-index:90;background:var(--text);border-radius:999px;padding:12px 20px;display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#fff;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.fab:hover{background:var(--blue)}
+
+/* LANG */
+[data-lang]{display:none}
+[data-lang="en"]{display:block}
+span[data-lang]{display:none}
+span[data-lang="en"]{display:inline}
+.en [data-lang="en"]{display:block}
+.en span[data-lang="en"]{display:inline}
+.en [data-lang="es"]{display:none!important}
+.es [data-lang="es"]{display:block}
+.es span[data-lang="es"]{display:inline}
+.es [data-lang="en"]{display:none!important}
+
+/* RESPONSIVE */
+@media(max-width:1100px){.pg{grid-template-columns:repeat(2,1fr)}.sg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){
+  .sw{grid-template-columns:1fr;gap:2.5rem}
+  .hero{flex-direction:column;padding-top:80px}
+  .hero-c{max-width:100%}
+  .hero p{margin:0 auto 2rem}
+  .hbtns{justify-content:center}
+  .hero-img{max-width:100%;width:100%}
+  .fg{grid-template-columns:1fr 1fr;gap:2rem}
+}
+@media(max-width:640px){
+  section{padding:3.5rem 1.25rem}
+  nav{padding:0 1.25rem}
+  .nav-links{display:none}
+  .pg{grid-template-columns:1fr}
+  .sg{grid-template-columns:1fr}
+  .ag{grid-template-columns:1fr}
+  .fr{grid-template-columns:1fr}
+  .fg{grid-template-columns:1fr;gap:2rem}
+  .fab span{display:none}
+  .fab{padding:13px}
+  .cta-btns{flex-direction:column;align-items:center}
+  .hero{text-align:center}
+}
+</style>
+</head>
+<body class="en">
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">All In One <em>Medical</em></a>
+  <div class="nav-r">
+    <ul class="nav-links">
+      <li><a href="#products"><span data-lang="en">Products</span><span data-lang="es">Productos</span></a></li>
+      <li><a href="#contact"><span data-lang="en">Contact</span><span data-lang="es">Contacto</span></a></li>
+    </ul>
+    <div class="lang-wrap">
+      <button class="lb on" id="ben" onclick="setLang('en')">English</button>
+      <button class="lb" id="bes" onclick="setLang('es')">Español</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-c">
+    <div class="pill"><span data-lang="en">Premium Medical Equipment</span><span data-lang="es">Equipo Médico de Primera</span></div>
+    <h1>
+      <span data-lang="en">Breathe Easy.<br><em>Live Freely.</em></span>
+      <span data-lang="es">Respira Libre.<br><em>Vive Mejor.</em></span>
+    </h1>
+    <p>
+      <span data-lang="en">New portable oxygen concentrators, mobility equipment, and medical devices — tested, sanitized, and ready for your next adventure.</span>
+      <span data-lang="es">Concentradores de oxígeno portátiles nuevos, equipo de movilidad y dispositivos médicos — probados, sanitizados y listos para tu próxima aventura.</span>
+    </p>
+    <div class="hbtns">
+      <a href="#products" class="btn btn-blue">
+        <span data-lang="en">Explore Units ↓</span>
+        <span data-lang="es">Ver Equipos ↓</span>
+      </a>
+      <a href="tel:9544017797" class="btn btn-ghost">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.67 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.36 6.36l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span data-lang="en">Call Now</span><span data-lang="es">Llamar</span>
+      </a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <!-- Reliable Pexels image of senior woman with oxygen concentrator -->
+    <img
+      src="https://images.pexels.com/photos/7551675/pexels-photo-7551675.jpeg?auto=compress&cs=tinysrgb&w=1200&h=900&fit=crop"
+      alt="Woman outdoors with portable oxygen concentrator"
+      loading="eager"
+    />
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust">
+  <div class="ti"><div class="tdot"></div><span data-lang="en">Brand New Equipment</span><span data-lang="es">Equipo Nuevo</span></div>
+  <div class="ti"><div class="tdot"></div><span data-lang="en">Same-Day Delivery Available</span><span data-lang="es">Entrega el Mismo Día</span></div>
+  <div class="ti"><div class="tdot"></div><span>Miami-Dade · Broward · Palm Beach</span></div>
+  <div class="ti"><div class="tdot"></div><span data-lang="en">FAA-Approved Options</span><span data-lang="es">Opciones Aprobadas FAA</span></div>
+  <div class="ti"><div class="tdot"></div><span data-lang="en">Hospital Discharge Support</span><span data-lang="es">Apoyo en Alta Hospitalaria</span></div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="tc">
+    <div class="ey"><span data-lang="en">Our Equipment</span><span data-lang="es">Nuestros Equipos</span></div>
+    <h2 class="st"><span data-lang="en">New Units Available Now</span><span data-lang="es">Unidades Nuevas Disponibles</span></h2>
+    <p class="ss"><span data-lang="en">Every unit is brand new, inspected, and tested to meet rigorous quality standards.</span><span data-lang="es">Cada unidad es nueva, inspeccionada y probada con los más altos estándares.</span></p>
+  </div>
+  <div class="pg">
+
+    <!-- Flow K1 Wheelchair -->
+    <div class="pc">
+      <div class="pbadge"><span data-lang="en">New</span><span data-lang="es">Nuevo</span></div>
+      <div class="pimg">
+        <img
+          src="https://www.rehabmart.com/imagesfromrd/k1_elr.jpg"
+          alt="Flow K1 Wheelchair by Rhythm Healthcare"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+      </div>
+      <div class="pi">
+        <div class="pn">Flow K1 Wheelchair</div>
+        <div class="pd">
+          <span data-lang="en">Lightweight carbon steel frame, flip-back arms, swing-away footrests. Folds to 11" wide — ideal for travel and everyday mobility. 300 lb capacity.</span>
+          <span data-lang="es">Marco de acero ligero, brazos plegables, reposapiés desmontables. Se pliega a 11" — ideal para viajes y movilidad diaria. Capacidad de 300 lbs.</span>
+        </div>
+        <div class="pf"><a href="#contact" class="inq"><span data-lang="en">Inquire →</span><span data-lang="es">Consultar →</span></a></div>
+      </div>
+    </div>
+
+    <!-- P2 Rhythm -->
+    <div class="pc">
+      <div class="pbadge"><span data-lang="en">New</span><span data-lang="es">Nuevo</span></div>
+      <div class="pimg">
+        <img
+          src="https://www.vitalitymedical.com/media/catalog/product/cache/f0486a80047dcb9112ac3f70ec55dda9/r/h/rhythm-p2-portable-oxygen-concentrator.jpg"
+          alt="P2 Portable Oxygen Concentrator Rhythm"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+      </div>
+      <div class="pi">
+        <div class="pn">P2 Portable Oxygen Concentrator Rhythm</div>
+        <div class="pd">
+          <span data-lang="en">Ultra-compact at 4.37 lbs. Pulse-dose settings 1–5, FAA-approved, up to 5 hrs battery. Ideal for travel and active lifestyles.</span>
+          <span data-lang="es">Ultra compacto con 4.37 lbs. Configuraciones 1–5, aprobado por la FAA, hasta 5 hrs de batería. Ideal para viajes y estilos de vida activos.</span>
+        </div>
+        <div class="pf"><a href="#contact" class="inq"><span data-lang="en">Inquire →</span><span data-lang="es">Consultar →</span></a></div>
+      </div>
+    </div>
+
+    <!-- Inogen Rove 6 -->
+    <div class="pc">
+      <div class="pbadge"><span data-lang="en">New</span><span data-lang="es">Nuevo</span></div>
+      <div class="pimg">
+        <img
+          src="https://www.vitalitymedical.com/media/catalog/product/cache/f0486a80047dcb9112ac3f70ec55dda9/i/n/inogen_16celbat.jpg"
+          alt="Inogen Rove 6 Portable Oxygen Concentrator"
+          loading="lazy"
+          onerror="this.style.display='none'"
+        />
+      </div>
+      <div class="pi">
+        <div class="pn">Inogen Rove 6 Portable Oxygen Concentrator</div>
+        <div class="pd">
+          <span data-lang="en">6 pulse-dose settings, 4.8 lbs. Up to 12 hrs 45 min battery. FAA-approved. Designed & assembled in the USA.</span>
+          <span data-lang="es">6 configuraciones, 4.8 lbs. Hasta 12 hrs 45 min de batería. Aprobado por la FAA. Diseñado y ensamblado en EE. UU.</span>
+        </div>
+        <div class="pf"><a href="#contact" class="inq"><span data-lang="en">Inquire →</span><span data-lang="es">Consultar →</span></a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section style="background:var(--bg)" id="services">
+  <div class="ey"><span data-lang="en">What We Help You With</span><span data-lang="es">Cómo Te Ayudamos</span></div>
+  <h2 class="st"><span data-lang="en">Equipment &amp; Services</span><span data-lang="es">Equipos y Servicios</span></h2>
+  <div class="sg">
+    <div class="sc">
+      <div class="sico">🫁</div>
+      <h3><span data-lang="en">Portable Oxygen</span><span data-lang="es">Oxígeno Portátil</span></h3>
+      <p><span data-lang="en">Travel-ready portable oxygen for home, flights, hotels, and short-term needs.</span><span data-lang="es">Oxígeno portátil listo para el hogar, vuelos, hoteles y necesidades a corto plazo.</span></p>
+      <a href="#products" class="sl"><span data-lang="en">View Options →</span><span data-lang="es">Ver Opciones →</span></a>
+    </div>
+    <div class="sc">
+      <div class="sico">✈️</div>
+      <h3><span data-lang="en">Travel &amp; Cruise Oxygen</span><span data-lang="es">Oxígeno para Viajes y Cruceros</span></h3>
+      <p><span data-lang="en">Planning support for flights, cruises, hotels, and vacation travel.</span><span data-lang="es">Apoyo de planificación para vuelos, cruceros, hoteles y vacaciones.</span></p>
+      <a href="#travel" class="sl"><span data-lang="en">Plan Travel Oxygen →</span><span data-lang="es">Planificar →</span></a>
+    </div>
+    <div class="sc">
+      <div class="sico">😴</div>
+      <h3><span data-lang="en">CPAP &amp; BiPAP</span><span data-lang="es">CPAP y BiPAP</span></h3>
+      <p><span data-lang="en">Respiratory sleep equipment support and supplies coordination.</span><span data-lang="es">Apoyo con equipo respiratorio para dormir y coordinación de suministros.</span></p>
+      <a href="#contact" class="sl"><span data-lang="en">Learn More →</span><span data-lang="es">Saber Más →</span></a>
+    </div>
+    <div class="sc">
+      <div class="sico">🏥</div>
+      <h3><span data-lang="en">Hospital Discharge</span><span data-lang="es">Alta Hospitalaria</span></h3>
+      <p><span data-lang="en">Equipment coordination for families, caregivers, and discharge planners.</span><span data-lang="es">Coordinación para familias, cuidadores y planificadores de alta.</span></p>
+      <a href="#hospital" class="sl"><span data-lang="en">Request Support →</span><span data-lang="es">Solicitar Apoyo →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL -->
+<section id="travel">
+  <div class="sw">
+    <div>
+      <div class="sey">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17.8 19.2 16 11l3.5-3.5C21 6 21 4 21 4s-2 0-3.5 1.5L14 9 5.8 7.2l-4.4 4.4 2.8 2.8 2-2 2 2-2 2 2.8 2.8 4.4-4.4z"/></svg>
+        <span data-lang="en">TRAVEL OXYGEN</span><span data-lang="es">OXÍGENO PARA VIAJES</span>
+      </div>
+      <h2><span data-lang="en">Oxygen Support for Flights, Cruises, Hotels &amp; Vacations</span><span data-lang="es">Soporte de Oxígeno para Vuelos, Cruceros, Hoteles y Vacaciones</span></h2>
+      <p class="ht"><span data-lang="en">Flying from MIA or FLL, staying at a hotel before a cruise, or planning a family visit — we coordinate portable oxygen rental timing, battery options, and delivery details.</span><span data-lang="es">Volando desde MIA o FLL, en un hotel antes de un crucero, o en una visita familiar — coordinamos el alquiler, baterías y entrega.</span></p>
+      <ul class="fl">
+        <li><span data-lang="en">Air travel planning</span><span data-lang="es">Planificación de viaje aéreo</span></li>
+        <li><span data-lang="en">Cruise oxygen coordination</span><span data-lang="es">Coordinación de oxígeno en crucero</span></li>
+        <li><span data-lang="en">Hotel delivery arrangements</span><span data-lang="es">Entrega en hotel</span></li>
+        <li><span data-lang="en">FAA-approved options available</span><span data-lang="es">Opciones aprobadas por la FAA</span></li>
+        <li><span data-lang="en">Battery planning &amp; backup</span><span data-lang="es">Planificación de batería y respaldo</span></li>
+      </ul>
+      <div class="sbtns">
+        <a href="#contact" class="btn btn-blue"><span data-lang="en">Plan Travel Oxygen</span><span data-lang="es">Planificar Oxígeno</span></a>
+        <a href="tel:9544017797" class="btn btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.67 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.36 6.36l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-lang="en">Call Now</span><span data-lang="es">Llamar</span>
+        </a>
+      </div>
+    </div>
+    <div class="fp">
+      <div class="fpi">✈️</div>
+      <div class="fpit"><span data-lang="en">Air travel planning</span><span data-lang="es">Planificación de viaje aéreo</span></div>
+      <div class="fpit"><span data-lang="en">Cruise oxygen coordination</span><span data-lang="es">Coordinación en crucero</span></div>
+      <div class="fpit"><span data-lang="en">Hotel delivery arrangements</span><span data-lang="es">Entrega en hotel</span></div>
+      <div class="fpit"><span data-lang="en">FAA-approved options available</span><span data-lang="es">Opciones aprobadas por la FAA</span></div>
+      <div class="fpit"><span data-lang="en">Battery planning &amp; backup</span><span data-lang="es">Batería y respaldo</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOSPITAL -->
+<section style="background:var(--bg)" id="hospital">
+  <div class="sw">
+    <div style="text-align:center">
+      <div style="font-size:88px;margin-bottom:1.5rem">🏥</div>
+      <ul class="fl" style="text-align:left;display:inline-block">
+        <li><span data-lang="en">Hospital bed coordination</span><span data-lang="es">Coordinación de camas</span></li>
+        <li><span data-lang="en">Patient lifts and transfer aids</span><span data-lang="es">Elevadores y ayudas de transferencia</span></li>
+        <li><span data-lang="en">Oxygen equipment delivery</span><span data-lang="es">Entrega de equipos de oxígeno</span></li>
+        <li><span data-lang="en">Same-day or next-day options</span><span data-lang="es">Opciones el mismo día o al siguiente</span></li>
+      </ul>
+    </div>
+    <div>
+      <div class="sey">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span data-lang="en">HOSPITAL DISCHARGE SUPPORT</span><span data-lang="es">APOYO EN ALTA HOSPITALARIA</span>
+      </div>
+      <h2><span data-lang="en">Help Transitioning Home from the Hospital</span><span data-lang="es">Ayuda para la Transición al Hogar</span></h2>
+      <p style="color:var(--text-mid);margin-bottom:1.5rem;font-size:15px;line-height:1.7">
+        <span data-lang="en">For families, caregivers, and hospital discharge planners, we coordinate equipment requests and delivery timing so patients transition smoothly from hospital to home.</span>
+        <span data-lang="es">Para familias, cuidadores y planificadores de alta, coordinamos equipos y tiempos de entrega para una transición tranquila del hospital al hogar.</span>
+      </p>
+      <div class="sbtns">
+        <a href="#contact" class="btn btn-blue"><span data-lang="en">Request Discharge Support</span><span data-lang="es">Solicitar Apoyo de Alta</span></a>
+        <a href="tel:9544017797" class="btn btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.67 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.36 6.36l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-lang="en">Call Now</span><span data-lang="es">Llamar</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE AREAS -->
+<section id="areas">
+  <div class="tc">
+    <div class="ey">COVERAGE</div>
+    <h2 class="st"><span data-lang="en">South Florida Service Areas</span><span data-lang="es">Áreas de Servicio en el Sur de Florida</span></h2>
+  </div>
+  <div class="ag">
+    <div class="ac">
+      <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Miami-Dade</h3>
+      <p><span data-lang="en">Miami, Hialeah, Coral Gables, Kendall, Doral, Miami Beach, and PortMiami.</span><span data-lang="es">Miami, Hialeah, Coral Gables, Kendall, Doral, Miami Beach y PortMiami.</span></p>
+      <a href="#contact" class="tl"><span data-lang="en">Portable Oxygen Miami →</span><span data-lang="es">Oxígeno Portátil Miami →</span></a>
+    </div>
+    <div class="ac">
+      <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Broward</h3>
+      <p><span data-lang="en">Fort Lauderdale, Hollywood, Pembroke Pines, Miramar, Coral Springs, and Port Everglades.</span><span data-lang="es">Fort Lauderdale, Hollywood, Pembroke Pines, Miramar, Coral Springs y Port Everglades.</span></p>
+      <a href="#contact" class="tl"><span data-lang="en">Medical Equipment Broward →</span><span data-lang="es">Equipo Médico Broward →</span></a>
+    </div>
+    <div class="ac">
+      <h3><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Palm Beach</h3>
+      <p><span data-lang="en">West Palm Beach, Boca Raton, Delray Beach, Boynton Beach, and surrounding communities.</span><span data-lang="es">West Palm Beach, Boca Raton, Delray Beach, Boynton Beach y comunidades aledañas.</span></p>
+      <a href="#contact" class="tl"><span data-lang="en">Oxygen Palm Beach →</span><span data-lang="es">Oxígeno Palm Beach →</span></a>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:2rem">
+    <a href="#contact" class="tl"><span data-lang="en">View All Service Areas →</span><span data-lang="es">Ver Todas las Áreas →</span></a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section style="background:var(--bg)">
+  <div class="tc">
+    <div class="ey">COMMON QUESTIONS</div>
+    <h2 class="st"><span data-lang="en">Frequently Asked Questions</span><span data-lang="es">Preguntas Frecuentes</span></h2>
+  </div>
+  <div class="faq-w">
+    <div class="fi">
+      <button class="fq" onclick="tfaq(this)">
+        <span><span data-lang="en">Can I rent portable oxygen for travel?</span><span data-lang="es">¿Puedo alquilar oxígeno portátil para viajar?</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="fa"><p><span data-lang="en">Yes! We offer portable oxygen rental coordination for flights, cruises, hotels, and vacation travel. We help match FAA-approved options and coordinate delivery to your hotel or cruise terminal.</span><span data-lang="es">¡Sí! Coordinamos alquiler de oxígeno portátil para vuelos, cruceros, hoteles y vacaciones con opciones aprobadas por la FAA.</span></p></div>
+    </div>
+    <div class="fi">
+      <button class="fq" onclick="tfaq(this)">
+        <span><span data-lang="en">How does delivery coordination work?</span><span data-lang="es">¿Cómo funciona la coordinación de entrega?</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="fa"><p><span data-lang="en">Contact us with your equipment needs, location, and timing. We coordinate delivery across Miami-Dade, Broward, and Palm Beach. Same-day and next-day options are often available.</span><span data-lang="es">Contáctenos con sus necesidades, ubicación y horario. Coordinamos entrega en Miami-Dade, Broward y Palm Beach.</span></p></div>
+    </div>
+    <div class="fi">
+      <button class="fq" onclick="tfaq(this)">
+        <span><span data-lang="en">Can you help with hospital discharge equipment?</span><span data-lang="es">¿Pueden ayudar con el alta hospitalaria?</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="fa"><p><span data-lang="en">Absolutely. We work with families, caregivers, and discharge planners to coordinate equipment so patients transition smoothly from hospital to home.</span><span data-lang="es">Por supuesto. Trabajamos con familias y planificadores para una transición tranquila del hospital al hogar.</span></p></div>
+    </div>
+    <div class="fi">
+      <button class="fq" onclick="tfaq(this)">
+        <span><span data-lang="en">Do you deliver to hotels or homes?</span><span data-lang="es">¿Entregan en hoteles o en casa?</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div class="fa"><p><span data-lang="en">Yes — homes, hotels, hospitals, cruise terminals, and more across South Florida. Contact us to discuss your location and timing.</span><span data-lang="es">Sí — hogares, hoteles, hospitales, terminales de crucero y más en el sur de Florida.</span></p></div>
+    </div>
+  </div>
+  <div class="ffoot"><a href="#contact" class="tl"><span data-lang="en">View All FAQs →</span><span data-lang="es">Ver Todas las Preguntas →</span></a></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="con-i">
+    <h2 class="st"><span data-lang="en">Ready to Breathe Freely?</span><span data-lang="es">¿Listo para Respirar Libre?</span></h2>
+    <p><span data-lang="en">Get in touch with our team for personalized recommendations.</span><span data-lang="es">Contáctenos para recomendaciones personalizadas.</span></p>
+    <div class="cf">
+      <div class="fr">
+        <div class="ff"><input type="text" placeholder="Full Name / Nombre Completo"></div>
+        <div class="ff"><input type="email" placeholder="Email / Correo Electrónico"></div>
+      </div>
+      <div class="fff"><input type="tel" placeholder="Phone Number / Número de Teléfono"></div>
+      <div class="fff"><textarea rows="4" placeholder="Tell us about your needs... / Cuéntenos sobre sus necesidades..."></textarea></div>
+      <button class="bsub">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        <span data-lang="en">Send Inquiry</span><span data-lang="es">Enviar Consulta</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta">
+  <h2><span data-lang="en">Need Equipment Today?</span><span data-lang="es">¿Necesita Equipo Hoy?</span></h2>
+  <p><span data-lang="en">Tell us what you need and we'll help coordinate the next step.</span><span data-lang="es">Díganos qué necesita y le ayudaremos a coordinar el siguiente paso.</span></p>
+  <div class="cta-btns">
+    <a href="#contact" class="btn btn-white">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+      <span data-lang="en">Request Equipment</span><span data-lang="es">Solicitar Equipo</span>
+    </a>
+    <a href="tel:9544017797" class="btn btn-ghost-w">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.67 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.36 6.36l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <span data-lang="en">Call Now</span><span data-lang="es">Llamar Ahora</span>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="fg">
+    <div class="fb">
+      <a href="#" class="logo">All In One <em>Medical</em> Group</a>
+      <p><span data-lang="en">Medical equipment and support across South Florida. Portable oxygen, travel and cruise support, mobility equipment, and discharge coordination for families and caregivers.</span><span data-lang="es">Equipo médico y apoyo en el sur de Florida. Oxígeno portátil, viajes y cruceros, movilidad y coordinación de alta para familias y cuidadores.</span></p>
+      <div class="fci">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.67 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.36 6.36l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:9544017797">(954) 401-7797</a>
+      </div>
+      <div class="fci">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span data-lang="en">Serving Miami-Dade, Broward &amp; Palm Beach Counties</span><span data-lang="es">Miami-Dade, Broward y Palm Beach</span>
+      </div>
+    </div>
+    <div class="fc">
+      <h4><span data-lang="en">Services</span><span data-lang="es">Servicios</span></h4>
+      <ul>
+        <li><a href="#"><span data-lang="en">Portable Oxygen Rentals</span><span data-lang="es">Alquiler de Oxígeno Portátil</span></a></li>
+        <li><a href="#"><span data-lang="en">Travel &amp; Cruise Oxygen</span><span data-lang="es">Oxígeno para Viajes</span></a></li>
+        <li><a href="#"><span data-lang="en">Mobility Equipment</span><span data-lang="es">Equipo de Movilidad</span></a></li>
+        <li><a href="#"><span data-lang="en">CPAP &amp; BiPAP</span><span data-lang="es">CPAP y BiPAP</span></a></li>
+        <li><a href="#"><span data-lang="en">Hospital Equipment</span><span data-lang="es">Equipo Hospitalario</span></a></li>
+        <li><a href="#"><span data-lang="en">Discharge Support</span><span data-lang="es">Apoyo de Alta</span></a></li>
+      </ul>
+    </div>
+    <div class="fc">
+      <h4><span data-lang="en">Service Areas</span><span data-lang="es">Áreas de Servicio</span></h4>
+      <ul>
+        <li><a href="#">Miami-Dade</a></li>
+        <li><a href="#"><span data-lang="en">Broward County</span><span data-lang="es">Condado de Broward</span></a></li>
+        <li><a href="#"><span data-lang="en">Palm Beach County</span><span data-lang="es">Condado de Palm Beach</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb2">
+    <p>© 2026 All In One Medical Group LLC.</p>
+    <p style="font-size:11px"><span data-lang="en">Equipment availability and delivery timing vary by request. Call for details.</span><span data-lang="es">La disponibilidad y plazos varían. Llame para detalles.</span></p>
+    <div class="fb2-l">
+      <a href="#"><span data-lang="en">Privacy Policy</span><span data-lang="es">Privacidad</span></a>
+      <a href="#"><span data-lang="en">Terms of Service</span><span data-lang="es">Términos</span></a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING CALL BUTTON -->
+<a href="tel:9544017797" class="fab">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.67 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.59 1.1h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 6.36 6.36l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  <span data-lang="en">Call Now</span><span data-lang="es">Llamar</span>
+</a>
+
+<script>
+function setLang(l){
+  document.body.className=l;
+  document.getElementById('ben').classList.toggle('on',l==='en');
+  document.getElementById('bes').classList.toggle('on',l==='es');
+  document.documentElement.lang=l;
+}
+function tfaq(b){
+  var a=b.nextElementSibling,o=a.classList.contains('on');
+  document.querySelectorAll('.fa').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.fq').forEach(x=>x.classList.remove('on'));
+  if(!o){a.classList.add('on');b.classList.add('on')}
+}
+</script>
+</body>
+</html>
